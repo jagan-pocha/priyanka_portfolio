@@ -3,317 +3,580 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Priyanka Tarlada - Infrastructure Engineer II</title>
+    <title>Priyanka Tarlada - Infrastructure Engineer</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
       * { margin: 0; padding: 0; box-sizing: border-box; }
       :root {
-        --primary: #1a73e8;
-        --secondary: #34a853;
-        --dark: #1f1f1f;
-        --light: #f8f9fa;
-        --gray: #5f6368;
-        --border: #e0e0e0;
+        --primary: #6366f1;
+        --secondary: #8b5cf6;
+        --accent: #ec4899;
+        --dark: #0f172a;
+        --light: #f1f5f9;
+        --card-bg: rgba(255, 255, 255, 0.9);
       }
       body {
-        font-family: 'Inter', system-ui, -apple-system, sans-serif;
-        line-height: 1.6;
+        font-family: 'Space Grotesk', system-ui, sans-serif;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         color: var(--dark);
-        background: var(--light);
+        overflow-x: hidden;
+        position: relative;
       }
+      
+      /* 3D Floating Shapes Background */
+      .floating-shapes {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 0;
+        overflow: hidden;
+        pointer-events: none;
+      }
+      .shape {
+        position: absolute;
+        opacity: 0.15;
+        animation: float 20s infinite ease-in-out;
+      }
+      .shape-1 {
+        top: 10%;
+        left: 10%;
+        width: 200px;
+        height: 200px;
+        background: linear-gradient(45deg, var(--primary), var(--secondary));
+        border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+        animation: float 15s infinite ease-in-out, rotate3d 20s infinite linear;
+        transform-style: preserve-3d;
+      }
+      .shape-2 {
+        top: 60%;
+        right: 15%;
+        width: 150px;
+        height: 150px;
+        background: linear-gradient(135deg, var(--accent), var(--secondary));
+        border-radius: 50%;
+        animation: float 18s infinite ease-in-out reverse, pulse 4s infinite ease-in-out;
+        transform-style: preserve-3d;
+      }
+      .shape-3 {
+        bottom: 20%;
+        left: 20%;
+        width: 180px;
+        height: 180px;
+        background: linear-gradient(225deg, var(--primary), var(--accent));
+        clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+        animation: float 22s infinite ease-in-out, rotate3d 15s infinite linear reverse;
+        transform-style: preserve-3d;
+      }
+      .shape-4 {
+        top: 40%;
+        left: 50%;
+        width: 120px;
+        height: 120px;
+        background: linear-gradient(180deg, var(--secondary), var(--primary));
+        border-radius: 20px;
+        animation: float 16s infinite ease-in-out, rotate3d 25s infinite linear;
+        transform-style: preserve-3d;
+      }
+      
+      @keyframes float {
+        0%, 100% { transform: translateY(0px) translateX(0px); }
+        25% { transform: translateY(-30px) translateX(20px); }
+        50% { transform: translateY(-50px) translateX(-10px); }
+        75% { transform: translateY(-20px) translateX(-30px); }
+      }
+      @keyframes rotate3d {
+        0% { transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg); }
+        100% { transform: rotateX(360deg) rotateY(360deg) rotateZ(360deg); }
+      }
+      @keyframes pulse {
+        0%, 100% { transform: scale(1); }
+        50% { transform: scale(1.1); }
+      }
+      
       .container {
-        max-width: 1000px;
+        max-width: 1200px;
         margin: 0 auto;
         padding: 0 24px;
+        position: relative;
+        z-index: 1;
       }
-      header {
-        background: linear-gradient(135deg, #1a73e8 0%, #4285f4 100%);
-        color: white;
-        padding: 80px 0 60px;
-        text-align: center;
-        box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-      }
-      .header-name {
-        font-size: 48px;
-        font-weight: 700;
-        margin-bottom: 12px;
-        letter-spacing: -0.5px;
-      }
-      .header-title {
-        font-size: 24px;
-        font-weight: 400;
-        opacity: 0.95;
-        margin-bottom: 30px;
-      }
-      .contact-links {
-        display: flex;
-        justify-content: center;
-        gap: 24px;
-        flex-wrap: wrap;
-        margin-top: 24px;
-      }
-      .contact-link {
-        color: white;
-        text-decoration: none;
+      
+      /* Hero Section with 3D Effect */
+      .hero {
+        min-height: 100vh;
         display: flex;
         align-items: center;
-        gap: 6px;
-        padding: 8px 16px;
-        background: rgba(255,255,255,0.15);
-        border-radius: 20px;
-        transition: all 0.3s ease;
-        font-size: 14px;
+        justify-content: center;
+        text-align: center;
+        position: relative;
+        perspective: 1000px;
       }
-      .contact-link:hover {
-        background: rgba(255,255,255,0.25);
-        transform: translateY(-2px);
+      .hero-content {
+        transform-style: preserve-3d;
+        animation: heroFloat 6s infinite ease-in-out;
       }
-      .section {
-        background: white;
-        margin: 40px auto;
-        padding: 40px;
-        border-radius: 12px;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      @keyframes heroFloat {
+        0%, 100% { transform: translateZ(0px) rotateX(0deg); }
+        50% { transform: translateZ(20px) rotateX(2deg); }
       }
-      .section-title {
-        font-size: 28px;
+      .hero-title {
+        font-size: 72px;
         font-weight: 700;
-        color: var(--primary);
-        margin-bottom: 24px;
-        padding-bottom: 12px;
-        border-bottom: 3px solid var(--primary);
+        color: white;
+        margin-bottom: 16px;
+        text-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        letter-spacing: -2px;
+        animation: slideUp 1s ease-out;
       }
-      .summary-text {
-        font-size: 16px;
+      .hero-subtitle {
+        font-size: 32px;
+        color: rgba(255,255,255,0.9);
+        margin-bottom: 32px;
+        font-weight: 300;
+        animation: slideUp 1s ease-out 0.2s both;
+      }
+      .hero-description {
+        font-size: 18px;
+        color: rgba(255,255,255,0.85);
+        max-width: 700px;
+        margin: 0 auto 48px;
         line-height: 1.8;
-        color: var(--gray);
+        animation: slideUp 1s ease-out 0.4s both;
       }
+      @keyframes slideUp {
+        from { opacity: 0; transform: translateY(30px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+      
+      .cta-buttons {
+        display: flex;
+        gap: 20px;
+        justify-content: center;
+        flex-wrap: wrap;
+        animation: slideUp 1s ease-out 0.6s both;
+      }
+      .btn {
+        padding: 16px 40px;
+        border-radius: 50px;
+        text-decoration: none;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        display: inline-block;
+        transform-style: preserve-3d;
+        position: relative;
+      }
+      .btn-primary {
+        background: white;
+        color: var(--primary);
+        box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+      }
+      .btn-primary:hover {
+        transform: translateY(-5px) scale(1.05);
+        box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+      }
+      .btn-secondary {
+        background: rgba(255,255,255,0.2);
+        color: white;
+        backdrop-filter: blur(10px);
+        border: 2px solid rgba(255,255,255,0.3);
+      }
+      .btn-secondary:hover {
+        background: rgba(255,255,255,0.3);
+        transform: translateY(-5px) scale(1.05);
+      }
+      
+      /* 3D Card Sections */
+      .section {
+        padding: 80px 0;
+        position: relative;
+      }
+      .card-3d {
+        background: var(--card-bg);
+        border-radius: 24px;
+        padding: 48px;
+        margin-bottom: 40px;
+        box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+        transform-style: preserve-3d;
+        transition: all 0.4s ease;
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255,255,255,0.5);
+      }
+      .card-3d:hover {
+        transform: translateY(-10px) rotateX(2deg);
+        box-shadow: 0 30px 80px rgba(0,0,0,0.25);
+      }
+      
+      .section-title {
+        font-size: 48px;
+        font-weight: 700;
+        color: white;
+        text-align: center;
+        margin-bottom: 60px;
+        text-shadow: 0 5px 20px rgba(0,0,0,0.2);
+        animation: fadeInScale 0.8s ease-out;
+      }
+      @keyframes fadeInScale {
+        from { opacity: 0; transform: scale(0.9); }
+        to { opacity: 1; transform: scale(1); }
+      }
+      
       .skills-grid {
         display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
         gap: 24px;
+        margin-top: 32px;
       }
-      .skill-category {
-        margin-bottom: 16px;
+      .skill-card {
+        background: linear-gradient(135deg, rgba(99,102,241,0.1), rgba(139,92,246,0.1));
+        padding: 24px;
+        border-radius: 16px;
+        border: 2px solid rgba(99,102,241,0.2);
+        transition: all 0.3s ease;
+        transform-style: preserve-3d;
       }
-      .skill-category-title {
-        font-weight: 600;
-        color: var(--dark);
-        margin-bottom: 8px;
-        font-size: 16px;
+      .skill-card:hover {
+        transform: translateZ(20px) scale(1.05);
+        border-color: var(--primary);
+        background: linear-gradient(135deg, rgba(99,102,241,0.2), rgba(139,92,246,0.2));
       }
-      .skill-category-content {
-        color: var(--gray);
-        line-height: 1.8;
-      }
-      .experience-item {
-        margin-bottom: 40px;
-        padding-bottom: 40px;
-        border-bottom: 1px solid var(--border);
-      }
-      .experience-item:last-child {
-        border-bottom: none;
-        margin-bottom: 0;
-        padding-bottom: 0;
-      }
-      .experience-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: start;
-        margin-bottom: 8px;
-        flex-wrap: wrap;
-        gap: 12px;
-      }
-      .company-name {
-        font-size: 22px;
+      .skill-title {
         font-weight: 700;
-        color: var(--dark);
-      }
-      .experience-duration {
-        font-size: 14px;
-        color: var(--gray);
-        font-weight: 500;
-      }
-      .job-title {
-        font-size: 18px;
         color: var(--primary);
-        font-weight: 600;
-        margin-bottom: 4px;
+        margin-bottom: 12px;
+        font-size: 18px;
       }
-      .job-location {
-        font-size: 14px;
-        color: var(--gray);
-        font-style: italic;
-        margin-bottom: 16px;
-      }
-      .responsibilities {
-        list-style: none;
-        padding-left: 0;
-      }
-      .responsibilities li {
-        padding-left: 24px;
-        margin-bottom: 10px;
-        position: relative;
-        color: var(--gray);
+      .skill-content {
+        color: var(--dark);
         line-height: 1.7;
+        font-size: 15px;
       }
-      .responsibilities li:before {
-        content: "▹";
+      
+      /* Experience Timeline with 3D Cards */
+      .timeline {
+        position: relative;
+        padding: 32px 0;
+      }
+      .timeline-item {
+        margin-bottom: 48px;
+        position: relative;
+        transform-style: preserve-3d;
+        animation: slideInLeft 0.6s ease-out;
+      }
+      @keyframes slideInLeft {
+        from { opacity: 0; transform: translateX(-50px); }
+        to { opacity: 1; transform: translateX(0); }
+      }
+      .timeline-card {
+        background: linear-gradient(135deg, rgba(255,255,255,0.95), rgba(255,255,255,0.85));
+        padding: 32px;
+        border-radius: 20px;
+        border-left: 4px solid var(--primary);
+        box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        transition: all 0.4s ease;
+        transform-style: preserve-3d;
+      }
+      .timeline-card:hover {
+        transform: translateX(10px) rotateY(-2deg);
+        box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+        border-left-color: var(--accent);
+      }
+      .company {
+        font-size: 24px;
+        font-weight: 700;
+        color: var(--primary);
+        margin-bottom: 8px;
+      }
+      .role {
+        font-size: 18px;
+        color: var(--dark);
+        font-weight: 600;
+        margin-bottom: 8px;
+      }
+      .duration {
+        display: inline-block;
+        padding: 6px 16px;
+        background: linear-gradient(135deg, var(--primary), var(--secondary));
+        color: white;
+        border-radius: 20px;
+        font-size: 14px;
+        margin-bottom: 16px;
+        font-weight: 600;
+      }
+      .achievements {
+        list-style: none;
+        margin-top: 16px;
+      }
+      .achievements li {
+        padding: 8px 0 8px 28px;
+        position: relative;
+        color: var(--dark);
+        line-height: 1.6;
+      }
+      .achievements li:before {
+        content: "◆";
         position: absolute;
         left: 0;
-        color: var(--primary);
-        font-weight: bold;
-        font-size: 18px;
+        color: var(--accent);
+        font-size: 14px;
       }
-      .highlight {
+      
+      /* Contact Section */
+      .contact-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 24px;
+        margin-top: 40px;
+      }
+      .contact-card {
+        background: white;
+        padding: 32px;
+        border-radius: 20px;
+        text-align: center;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        transition: all 0.3s ease;
+        transform-style: preserve-3d;
+      }
+      .contact-card:hover {
+        transform: translateY(-10px) rotateZ(2deg);
+        box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+      }
+      .contact-icon {
+        font-size: 48px;
+        margin-bottom: 16px;
+        display: block;
+      }
+      .contact-label {
         font-weight: 600;
-        color: var(--dark);
+        color: var(--primary);
+        margin-bottom: 8px;
+        font-size: 14px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
       }
+      .contact-value {
+        color: var(--dark);
+        font-size: 16px;
+        word-break: break-word;
+      }
+      .contact-link {
+        color: var(--dark);
+        text-decoration: none;
+        transition: color 0.3s;
+      }
+      .contact-link:hover {
+        color: var(--primary);
+      }
+      
       footer {
         text-align: center;
         padding: 40px 0;
-        color: var(--gray);
+        color: white;
         font-size: 14px;
+        opacity: 0.9;
       }
+      
       @media (max-width: 768px) {
-        .header-name {
-          font-size: 36px;
-        }
-        .header-title {
-          font-size: 20px;
-        }
-        .section {
-          padding: 24px;
-          margin: 24px auto;
-        }
-        .section-title {
-          font-size: 24px;
-        }
-        .experience-header {
-          flex-direction: column;
-        }
-        .contact-links {
-          flex-direction: column;
-          gap: 12px;
-        }
+        .hero-title { font-size: 48px; }
+        .hero-subtitle { font-size: 24px; }
+        .section-title { font-size: 36px; }
+        .card-3d { padding: 32px 24px; }
+        .cta-buttons { flex-direction: column; }
+        .skills-grid { grid-template-columns: 1fr; }
       }
     </style>
   </head>
   <body>
-    <header>
+    <div class="floating-shapes">
+      <div class="shape shape-1"></div>
+      <div class="shape shape-2"></div>
+      <div class="shape shape-3"></div>
+      <div class="shape shape-4"></div>
+    </div>
+
+    <section class="hero">
       <div class="container">
-        <h1 class="header-name">PRIYANKA TARLADA</h1>
-        <p class="header-title">INFRASTRUCTURE ENGINEER II</p>
-        <div class="contact-links">
-          <a href="https://www.linkedin.com/in/t-priyanka-58a147211" target="_blank" class="contact-link">
-            <span>🔗</span> LinkedIn
-          </a>
-          <a href="mailto:priyankaco21@gmail.com" class="contact-link">
-            <span>✉️</span> priyankaco21@gmail.com
-          </a>
-          <a href="tel:+917893116424" class="contact-link">
-            <span>📱</span> +91 7893116424
-          </a>
-          <span class="contact-link">
-            <span>📍</span> Hyderabad, TG
-          </span>
+        <div class="hero-content">
+          <h1 class="hero-title">Priyanka Tarlada</h1>
+          <p class="hero-subtitle">Infrastructure Engineer II</p>
+          <p class="hero-description">
+            Specializing in Oracle Exadata environments, cloud architecture, and high-performance database solutions. 
+            6+ years of expertise in managing mission-critical systems at scale.
+          </p>
+          <div class="cta-buttons">
+            <a href="https://www.linkedin.com/in/t-priyanka-58a147211" target="_blank" class="btn btn-primary">View LinkedIn</a>
+            <a href="mailto:priyankaco21@gmail.com" class="btn btn-secondary">Get In Touch</a>
+          </div>
         </div>
       </div>
-    </header>
+    </section>
 
-    <main class="container">
-      <section class="section">
-        <h2 class="section-title">Professional Summary</h2>
-        <p class="summary-text">
-          Having 6+ years of professional in managing, tuning, and securing largescale Oracle Exadata environments. Skilled in database 
-          Maintain, migration, performance optimization, <span class="highlight">RAC, ASM, Golden Gate, RMAN</span> backup/recovery, and high availability 
-          solutions. Expertise in cloud-based database solutions using <span class="highlight">AWS RDS, K2s, S3, CloudWatch</span>. Adept at designing and 
-          implementing hybrid database architectures and supporting mission-critical applications in Multi client environment and Banking.
-        </p>
-      </section>
-
-      <section class="section">
-        <h2 class="section-title">Technical Skills</h2>
-        <div class="skills-grid">
-          <div class="skill-category">
-            <div class="skill-category-title">Languages:</div>
-            <div class="skill-category-content">SQL, Linux Shell Scripting</div>
-          </div>
-          <div class="skill-category">
-            <div class="skill-category-title">Databases:</div>
-            <div class="skill-category-content">Oracle 11g, 12c, 18c, 19c, Db2, Oracle RAC, Data Guard, ASM, RMAN, ZDLRA, GoldenGate, Exadata, AWS RDS</div>
-          </div>
-          <div class="skill-category">
-            <div class="skill-category-title">Tools and Frameworks:</div>
-            <div class="skill-category-content">OEM (Oracle Enterprise Manager), ServiceNow, Splunk, Geneos, EXPDP/IMPDP, HSM, AWR, ADDM, ASH, CloudWatch, IAM, AWS EC2, AWS S3</div>
-          </div>
-          <div class="skill-category">
-            <div class="skill-category-title">Performance & Administration:</div>
-            <div class="skill-category-content">Performance Tuning (SQL), Database Upgrades/Migrations, Exadata Configuration & Administration, RDBMS & GRID Patching, Security Management, Compliance</div>
-          </div>
-          <div class="skill-category">
-            <div class="skill-category-title">Software Methodologies:</div>
-            <div class="skill-category-content">Agile, ITIL</div>
+    <section class="section">
+      <div class="container">
+        <h2 class="section-title">Expertise</h2>
+        <div class="card-3d">
+          <div class="skills-grid">
+            <div class="skill-card">
+              <div class="skill-title">Database Technologies</div>
+              <div class="skill-content">Oracle 11g-19c, RAC, ASM, RMAN, Data Guard, GoldenGate, Exadata, AWS RDS</div>
+            </div>
+            <div class="skill-card">
+              <div class="skill-title">Cloud & DevOps</div>
+              <div class="skill-content">AWS (EC2, S3, RDS, CloudWatch), ServiceNow, Splunk, Geneos, IAM</div>
+            </div>
+            <div class="skill-card">
+              <div class="skill-title">Performance & Tuning</div>
+              <div class="skill-content">SQL Optimization, AWR, ADDM, ASH, SOLTJX, AHF, Database Migration</div>
+            </div>
+            <div class="skill-card">
+              <div class="skill-title">Backup & Recovery</div>
+              <div class="skill-content">ZDLRA, Cohesity, HSM, RMAN, Data Pump, Full/Incremental Backups</div>
+            </div>
+            <div class="skill-card">
+              <div class="skill-title">Automation & Scripting</div>
+              <div class="skill-content">Shell Scripting, Linux, Control-M, Automation Frameworks</div>
+            </div>
+            <div class="skill-card">
+              <div class="skill-title">Methodologies</div>
+              <div class="skill-content">Agile, ITIL, Security Compliance, Disaster Recovery Planning</div>
+            </div>
           </div>
         </div>
-      </section>
+      </div>
+    </section>
 
-      <section class="section">
-        <h2 class="section-title">Experience</h2>
-        
-        <div class="experience-item">
-          <div class="experience-header">
-            <h3 class="company-name">JP Morgan Chase & Co</h3>
-            <span class="experience-duration">Jun 2022 – Present</span>
+    <section class="section">
+      <div class="container">
+        <h2 class="section-title">Professional Journey</h2>
+        <div class="card-3d">
+          <div class="timeline">
+            <div class="timeline-item">
+              <div class="timeline-card">
+                <div class="company">JP Morgan Chase & Co</div>
+                <div class="role">Infrastructure Engineer II</div>
+                <span class="duration">Jun 2022 – Present | Hyderabad</span>
+                <ul class="achievements">
+                  <li>Architected and managed Exadata database environments handling 20-30TB+ production workloads</li>
+                  <li>Implemented ZDLRA and Cohesity backup solutions achieving RPO/RTO compliance</li>
+                  <li>Reduced infrastructure drift from 20,000+ to 5,000 through automated management</li>
+                  <li>Led Data Guard disaster recovery implementations with zero data loss configuration</li>
+                  <li>Optimized database performance through SQL tuning, AWR analysis, and capacity planning</li>
+                  <li>Managed RAC-enabled Exadata migrations for high-transaction OLTP systems</li>
+                  <li>Deployed HSM and AIM solutions across production and non-production environments</li>
+                </ul>
+              </div>
+            </div>
+            
+            <div class="timeline-item">
+              <div class="timeline-card">
+                <div class="company">Accenture</div>
+                <div class="role">Cloud Ops Administration Analyst</div>
+                <span class="duration">May 2021 – Jun 2022 | Hyderabad</span>
+                <ul class="achievements">
+                  <li>Supported 10+ multi-client database environments with 99.9% uptime SLA</li>
+                  <li>Managed Oracle RAC and Data Guard installations across RHEL/OEL platforms</li>
+                  <li>Automated backup solutions using RMAN with OEM 13c cloud control integration</li>
+                  <li>Applied PSU patches and bug fixes using OPatch automation (rolling/non-rolling)</li>
+                  <li>Performed database cloning, refreshes, and migrations using Data Pump and RMAN</li>
+                  <li>Administered AWS RDS instances and optimized cloud database performance</li>
+                  <li>Troubleshot ORA errors and coordinated with Oracle support for resolution</li>
+                </ul>
+              </div>
+            </div>
           </div>
-          <div class="job-title">Infrastructure Engineer II</div>
-          <div class="job-location">Hyderabad, Telangana</div>
-          <ul class="responsibilities">
-            <li>Worked on Exadata Machines, Security Management, Server image Patching, Compliance.</li>
-            <li>Managed Cohesity and <span class="highlight">ZDLRA</span> backups for all prod critical database of size more than <span class="highlight">20 - 30 TB</span>.</li>
-            <li>Managed <span class="highlight">RAC-enabled Exadata</span> databases with high transaction loads for Migration clients.</li>
-            <li>Designed and implemented <span class="highlight">Data Guard</span> for disaster recovery and achieved <span class="highlight">RPO/RTO</span> targets.</li>
-            <li>Conducted capacity audits, partitioning, and performance analysis for large <span class="highlight">OLTP</span> databases.</li>
-            <li>Worked on <span class="highlight">HSM</span> implementation and <span class="highlight">AIM installations</span> for Prod & Non-Prod databases.</li>
-            <li>Created an <span class="highlight">AAAS</span> to cleanup database management for more than <span class="highlight">OLTP</span> systems in Exadata machines.</li>
-            <li>Worked on Exadata drift management and security Management where I reduced farm breaks from <span class="highlight">20,000+ to 5,000</span> around.</li>
-            <li>Performed database Migration from <span class="highlight">RAC & GRID</span> old version to New and Migrate Prod databases.</li>
-            <li>Setup Container and Pluggable Database model and Scheduled control M jobs (L0, L1 and Archive backups) for the same.</li>
-            <li>Worked on Container/Pluggable Databases <span class="highlight">RDBMS</span> and <span class="highlight">GRID</span> upgrades, Disk space management and Failed DISKS replacement and Repairs.</li>
-            <li>Strong Expertise in Performance tuning and <span class="highlight">SQL</span> tunning advisor and <span class="highlight">AHF, SOLTJX</span>.</li>
-            <li>Generated AWR, ADDM & ASH Reports to monitor the performance of the database.</li>
-          </ul>
         </div>
+      </div>
+    </section>
 
-        <div class="experience-item">
-          <div class="experience-header">
-            <h3 class="company-name">Accenture</h3>
-            <span class="experience-duration">May 2021 – Jun 2022</span>
+    <section class="section">
+      <div class="container">
+        <h2 class="section-title">Connect</h2>
+        <div class="card-3d">
+          <div class="contact-grid">
+            <div class="contact-card">
+              <span class="contact-icon">💼</span>
+              <div class="contact-label">LinkedIn</div>
+              <div class="contact-value">
+                <a href="https://www.linkedin.com/in/t-priyanka-58a147211" target="_blank" class="contact-link">View Profile</a>
+              </div>
+            </div>
+            <div class="contact-card">
+              <span class="contact-icon">✉️</span>
+              <div class="contact-label">Email</div>
+              <div class="contact-value">
+                <a href="mailto:priyankaco21@gmail.com" class="contact-link">priyankaco21@gmail.com</a>
+              </div>
+            </div>
+            <div class="contact-card">
+              <span class="contact-icon">📱</span>
+              <div class="contact-label">Phone</div>
+              <div class="contact-value">
+                <a href="tel:+917893116424" class="contact-link">+91 7893116424</a>
+              </div>
+            </div>
+            <div class="contact-card">
+              <span class="contact-icon">📍</span>
+              <div class="contact-label">Location</div>
+              <div class="contact-value">Hyderabad, TG</div>
+            </div>
           </div>
-          <div class="job-title">Cloud Ops Administration Analyst</div>
-          <div class="job-location">Hyderabad, Telangana</div>
-          <ul class="responsibilities">
-            <li>I have worked on Multi client support where I supported Almost <span class="highlight">10 + clients</span>.</li>
-            <li>Experienced in supporting Production Database instances across multiple clients lifecycle including Installations, Upgradation, Patching, Backup/Recovery, High Availability including <span class="highlight">Oracle Real Application Cluster (RAC)</span> and <span class="highlight">Data Guard</span>.</li>
-            <li>Having knowledge on database installation of <span class="highlight">Oracle 19c</span> across multiple platform including Installation of Oracle DB on <span class="highlight">OEL 12c</span> and <span class="highlight">RHEL 6/7</span> Linux platform.</li>
-            <li>Having knowledge on database creation using <span class="highlight">DBCA</span> method and Manual install. Experience in Configuring & managing backup using <span class="highlight">RMAN</span> and Cronjobs for Oracle Databases in crontab and from <span class="highlight">OEM 13c</span> cloud control.</li>
-            <li>Applied <span class="highlight">PSU</span> patches, Bundle and Bug patches to fix the bugs using <span class="highlight">OPatch & OPatchAuto</span> both rolling & non-rolling manner.</li>
-            <li>Performed Database, schema & Table level refreshes using <span class="highlight">Logical backups</span> method and <span class="highlight">Data pump</span>.</li>
-            <li>Created and monitored all the Tablespaces, added space to tablespaces as and when required.</li>
-            <li>Knowledge in cloning of the databases using <span class="highlight">Full backups & RMAN</span> duplicate command and <span class="highlight">Oracle Home cloning</span>.</li>
-            <li>Administered database user accounts. Created, modified database users and managed permissions and access rights.</li>
-            <li>Deep understanding of <span class="highlight">AWS RDS</span> instances.</li>
-            <li>Troubleshooted <span class="highlight">ORA errors</span> and Raising Service request to Oracle support.</li>
-          </ul>
         </div>
-      </section>
-    </main>
+      </div>
+    </section>
 
     <footer>
       <div class="container">
         <p>&copy; 2024 Priyanka Tarlada. All rights reserved.</p>
       </div>
     </footer>
+
+    <script>
+      // Smooth scroll for internal links
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+          e.preventDefault();
+          const target = document.querySelector(this.getAttribute('href'));
+          if (target) {
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        });
+      });
+
+      // Parallax effect for floating shapes
+      let scrollY = 0;
+      window.addEventListener('scroll', () => {
+        scrollY = window.scrollY;
+        const shapes = document.querySelectorAll('.shape');
+        shapes.forEach((shape, index) => {
+          const speed = 0.5 + (index * 0.1);
+          shape.style.transform = `translateY(${scrollY * speed}px)`;
+        });
+      });
+
+      // Intersection Observer for scroll animations
+      const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -100px 0px'
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.style.opacity = '1';
+            entry.target.style.transform = 'translateY(0)';
+          }
+        });
+      }, observerOptions);
+
+      document.querySelectorAll('.card-3d, .timeline-item').forEach(el => {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(30px)';
+        el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        observer.observe(el);
+      });
+    </script>
   </body>
 </html>
