@@ -3,31 +3,317 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>App</title>
+    <title>Priyanka Tarlada - Infrastructure Engineer II</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
-      :root { --bg: #0b1a2b; --fg: #ffffff; --accent: #2b8cff; }
-      * { box-sizing: border-box; }
-      body { margin: 0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji"; background: var(--bg); color: var(--fg); }
-      .page-shell { min-height: 100vh; display: grid; place-items: center; padding: 24px; }
-      .welcome-card { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); border-radius: 16px; padding: 32px 28px; max-width: 720px; width: 100%; box-shadow: 0 10px 30px rgba(0,0,0,0.25); }
-      .title { margin: 0 0 8px; font-size: 28px; line-height: 1.2; }
-      .subtitle { margin: 0 0 20px; opacity: 0.8; }
-      .status { display: inline-block; padding: 8px 12px; border-radius: 999px; background: rgba(43,140,255,0.12); color: var(--accent); border: 1px solid rgba(43,140,255,0.25); font-weight: 600; }
-      .tip { margin-top: 20px; opacity: 0.85; font-size: 14px; }
-      @media (max-width: 600px) {
-        .welcome-card { padding: 24px 20px; border-radius: 14px; }
-        .title { font-size: 22px; }
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      :root {
+        --primary: #1a73e8;
+        --secondary: #34a853;
+        --dark: #1f1f1f;
+        --light: #f8f9fa;
+        --gray: #5f6368;
+        --border: #e0e0e0;
+      }
+      body {
+        font-family: 'Inter', system-ui, -apple-system, sans-serif;
+        line-height: 1.6;
+        color: var(--dark);
+        background: var(--light);
+      }
+      .container {
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 0 24px;
+      }
+      header {
+        background: linear-gradient(135deg, #1a73e8 0%, #4285f4 100%);
+        color: white;
+        padding: 80px 0 60px;
+        text-align: center;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      }
+      .header-name {
+        font-size: 48px;
+        font-weight: 700;
+        margin-bottom: 12px;
+        letter-spacing: -0.5px;
+      }
+      .header-title {
+        font-size: 24px;
+        font-weight: 400;
+        opacity: 0.95;
+        margin-bottom: 30px;
+      }
+      .contact-links {
+        display: flex;
+        justify-content: center;
+        gap: 24px;
+        flex-wrap: wrap;
+        margin-top: 24px;
+      }
+      .contact-link {
+        color: white;
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        padding: 8px 16px;
+        background: rgba(255,255,255,0.15);
+        border-radius: 20px;
+        transition: all 0.3s ease;
+        font-size: 14px;
+      }
+      .contact-link:hover {
+        background: rgba(255,255,255,0.25);
+        transform: translateY(-2px);
+      }
+      .section {
+        background: white;
+        margin: 40px auto;
+        padding: 40px;
+        border-radius: 12px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      }
+      .section-title {
+        font-size: 28px;
+        font-weight: 700;
+        color: var(--primary);
+        margin-bottom: 24px;
+        padding-bottom: 12px;
+        border-bottom: 3px solid var(--primary);
+      }
+      .summary-text {
+        font-size: 16px;
+        line-height: 1.8;
+        color: var(--gray);
+      }
+      .skills-grid {
+        display: grid;
+        gap: 24px;
+      }
+      .skill-category {
+        margin-bottom: 16px;
+      }
+      .skill-category-title {
+        font-weight: 600;
+        color: var(--dark);
+        margin-bottom: 8px;
+        font-size: 16px;
+      }
+      .skill-category-content {
+        color: var(--gray);
+        line-height: 1.8;
+      }
+      .experience-item {
+        margin-bottom: 40px;
+        padding-bottom: 40px;
+        border-bottom: 1px solid var(--border);
+      }
+      .experience-item:last-child {
+        border-bottom: none;
+        margin-bottom: 0;
+        padding-bottom: 0;
+      }
+      .experience-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: start;
+        margin-bottom: 8px;
+        flex-wrap: wrap;
+        gap: 12px;
+      }
+      .company-name {
+        font-size: 22px;
+        font-weight: 700;
+        color: var(--dark);
+      }
+      .experience-duration {
+        font-size: 14px;
+        color: var(--gray);
+        font-weight: 500;
+      }
+      .job-title {
+        font-size: 18px;
+        color: var(--primary);
+        font-weight: 600;
+        margin-bottom: 4px;
+      }
+      .job-location {
+        font-size: 14px;
+        color: var(--gray);
+        font-style: italic;
+        margin-bottom: 16px;
+      }
+      .responsibilities {
+        list-style: none;
+        padding-left: 0;
+      }
+      .responsibilities li {
+        padding-left: 24px;
+        margin-bottom: 10px;
+        position: relative;
+        color: var(--gray);
+        line-height: 1.7;
+      }
+      .responsibilities li:before {
+        content: "▹";
+        position: absolute;
+        left: 0;
+        color: var(--primary);
+        font-weight: bold;
+        font-size: 18px;
+      }
+      .highlight {
+        font-weight: 600;
+        color: var(--dark);
+      }
+      footer {
+        text-align: center;
+        padding: 40px 0;
+        color: var(--gray);
+        font-size: 14px;
+      }
+      @media (max-width: 768px) {
+        .header-name {
+          font-size: 36px;
+        }
+        .header-title {
+          font-size: 20px;
+        }
+        .section {
+          padding: 24px;
+          margin: 24px auto;
+        }
+        .section-title {
+          font-size: 24px;
+        }
+        .experience-header {
+          flex-direction: column;
+        }
+        .contact-links {
+          flex-direction: column;
+          gap: 12px;
+        }
       }
     </style>
   </head>
   <body>
-    <main class="page-shell">
-      <section class="welcome-card" aria-label="Application status">
-        <h1 class="title">Your application is running</h1>
-        <p class="subtitle">Static server is active on port 3000.</p>
-        <span class="status">OK</span>
-        <p class="tip">You can now add your app code and assets in this directory. The server will serve files from the project root.</p>
+    <header>
+      <div class="container">
+        <h1 class="header-name">PRIYANKA TARLADA</h1>
+        <p class="header-title">INFRASTRUCTURE ENGINEER II</p>
+        <div class="contact-links">
+          <a href="https://www.linkedin.com/in/t-priyanka-58a147211" target="_blank" class="contact-link">
+            <span>🔗</span> LinkedIn
+          </a>
+          <a href="mailto:priyankaco21@gmail.com" class="contact-link">
+            <span>✉️</span> priyankaco21@gmail.com
+          </a>
+          <a href="tel:+917893116424" class="contact-link">
+            <span>📱</span> +91 7893116424
+          </a>
+          <span class="contact-link">
+            <span>📍</span> Hyderabad, TG
+          </span>
+        </div>
+      </div>
+    </header>
+
+    <main class="container">
+      <section class="section">
+        <h2 class="section-title">Professional Summary</h2>
+        <p class="summary-text">
+          Having 6+ years of professional in managing, tuning, and securing largescale Oracle Exadata environments. Skilled in database 
+          Maintain, migration, performance optimization, <span class="highlight">RAC, ASM, Golden Gate, RMAN</span> backup/recovery, and high availability 
+          solutions. Expertise in cloud-based database solutions using <span class="highlight">AWS RDS, K2s, S3, CloudWatch</span>. Adept at designing and 
+          implementing hybrid database architectures and supporting mission-critical applications in Multi client environment and Banking.
+        </p>
+      </section>
+
+      <section class="section">
+        <h2 class="section-title">Technical Skills</h2>
+        <div class="skills-grid">
+          <div class="skill-category">
+            <div class="skill-category-title">Languages:</div>
+            <div class="skill-category-content">SQL, Linux Shell Scripting</div>
+          </div>
+          <div class="skill-category">
+            <div class="skill-category-title">Databases:</div>
+            <div class="skill-category-content">Oracle 11g, 12c, 18c, 19c, Db2, Oracle RAC, Data Guard, ASM, RMAN, ZDLRA, GoldenGate, Exadata, AWS RDS</div>
+          </div>
+          <div class="skill-category">
+            <div class="skill-category-title">Tools and Frameworks:</div>
+            <div class="skill-category-content">OEM (Oracle Enterprise Manager), ServiceNow, Splunk, Geneos, EXPDP/IMPDP, HSM, AWR, ADDM, ASH, CloudWatch, IAM, AWS EC2, AWS S3</div>
+          </div>
+          <div class="skill-category">
+            <div class="skill-category-title">Performance & Administration:</div>
+            <div class="skill-category-content">Performance Tuning (SQL), Database Upgrades/Migrations, Exadata Configuration & Administration, RDBMS & GRID Patching, Security Management, Compliance</div>
+          </div>
+          <div class="skill-category">
+            <div class="skill-category-title">Software Methodologies:</div>
+            <div class="skill-category-content">Agile, ITIL</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2 class="section-title">Experience</h2>
+        
+        <div class="experience-item">
+          <div class="experience-header">
+            <h3 class="company-name">JP Morgan Chase & Co</h3>
+            <span class="experience-duration">Jun 2022 – Present</span>
+          </div>
+          <div class="job-title">Infrastructure Engineer II</div>
+          <div class="job-location">Hyderabad, Telangana</div>
+          <ul class="responsibilities">
+            <li>Worked on Exadata Machines, Security Management, Server image Patching, Compliance.</li>
+            <li>Managed Cohesity and <span class="highlight">ZDLRA</span> backups for all prod critical database of size more than <span class="highlight">20 - 30 TB</span>.</li>
+            <li>Managed <span class="highlight">RAC-enabled Exadata</span> databases with high transaction loads for Migration clients.</li>
+            <li>Designed and implemented <span class="highlight">Data Guard</span> for disaster recovery and achieved <span class="highlight">RPO/RTO</span> targets.</li>
+            <li>Conducted capacity audits, partitioning, and performance analysis for large <span class="highlight">OLTP</span> databases.</li>
+            <li>Worked on <span class="highlight">HSM</span> implementation and <span class="highlight">AIM installations</span> for Prod & Non-Prod databases.</li>
+            <li>Created an <span class="highlight">AAAS</span> to cleanup database management for more than <span class="highlight">OLTP</span> systems in Exadata machines.</li>
+            <li>Worked on Exadata drift management and security Management where I reduced farm breaks from <span class="highlight">20,000+ to 5,000</span> around.</li>
+            <li>Performed database Migration from <span class="highlight">RAC & GRID</span> old version to New and Migrate Prod databases.</li>
+            <li>Setup Container and Pluggable Database model and Scheduled control M jobs (L0, L1 and Archive backups) for the same.</li>
+            <li>Worked on Container/Pluggable Databases <span class="highlight">RDBMS</span> and <span class="highlight">GRID</span> upgrades, Disk space management and Failed DISKS replacement and Repairs.</li>
+            <li>Strong Expertise in Performance tuning and <span class="highlight">SQL</span> tunning advisor and <span class="highlight">AHF, SOLTJX</span>.</li>
+            <li>Generated AWR, ADDM & ASH Reports to monitor the performance of the database.</li>
+          </ul>
+        </div>
+
+        <div class="experience-item">
+          <div class="experience-header">
+            <h3 class="company-name">Accenture</h3>
+            <span class="experience-duration">May 2021 – Jun 2022</span>
+          </div>
+          <div class="job-title">Cloud Ops Administration Analyst</div>
+          <div class="job-location">Hyderabad, Telangana</div>
+          <ul class="responsibilities">
+            <li>I have worked on Multi client support where I supported Almost <span class="highlight">10 + clients</span>.</li>
+            <li>Experienced in supporting Production Database instances across multiple clients lifecycle including Installations, Upgradation, Patching, Backup/Recovery, High Availability including <span class="highlight">Oracle Real Application Cluster (RAC)</span> and <span class="highlight">Data Guard</span>.</li>
+            <li>Having knowledge on database installation of <span class="highlight">Oracle 19c</span> across multiple platform including Installation of Oracle DB on <span class="highlight">OEL 12c</span> and <span class="highlight">RHEL 6/7</span> Linux platform.</li>
+            <li>Having knowledge on database creation using <span class="highlight">DBCA</span> method and Manual install. Experience in Configuring & managing backup using <span class="highlight">RMAN</span> and Cronjobs for Oracle Databases in crontab and from <span class="highlight">OEM 13c</span> cloud control.</li>
+            <li>Applied <span class="highlight">PSU</span> patches, Bundle and Bug patches to fix the bugs using <span class="highlight">OPatch & OPatchAuto</span> both rolling & non-rolling manner.</li>
+            <li>Performed Database, schema & Table level refreshes using <span class="highlight">Logical backups</span> method and <span class="highlight">Data pump</span>.</li>
+            <li>Created and monitored all the Tablespaces, added space to tablespaces as and when required.</li>
+            <li>Knowledge in cloning of the databases using <span class="highlight">Full backups & RMAN</span> duplicate command and <span class="highlight">Oracle Home cloning</span>.</li>
+            <li>Administered database user accounts. Created, modified database users and managed permissions and access rights.</li>
+            <li>Deep understanding of <span class="highlight">AWS RDS</span> instances.</li>
+            <li>Troubleshooted <span class="highlight">ORA errors</span> and Raising Service request to Oracle support.</li>
+          </ul>
+        </div>
       </section>
     </main>
+
+    <footer>
+      <div class="container">
+        <p>&copy; 2024 Priyanka Tarlada. All rights reserved.</p>
+      </div>
+    </footer>
   </body>
 </html>
